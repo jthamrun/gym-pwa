@@ -313,29 +313,63 @@ const S = {
 // ─────────────────────────────────────────────
 // PERSISTENCE
 // ─────────────────────────────────────────────
+const APP_VER = '1.1';
 function save() {
   try { localStorage.setItem('gym_ws', JSON.stringify(S.ws)); } catch(_) {}
 }
 function load() {
-  try { const d = localStorage.getItem('gym_ws'); if (d) S.ws = JSON.parse(d); } catch(_) {}
+  try {
+    if (localStorage.getItem('gym_ver') !== APP_VER) {
+      localStorage.removeItem('gym_ws');
+      localStorage.setItem('gym_ver', APP_VER);
+      return;
+    }
+    const d = localStorage.getItem('gym_ws');
+    if (d) S.ws = JSON.parse(d);
+  } catch(_) {}
 }
 
 // ─────────────────────────────────────────────
 // SESSION STATE INIT
 // ─────────────────────────────────────────────
 function ensureWS(idx) {
-  if (S.ws[idx]) return;
+  if (!S.ws[idx]) S.ws[idx] = {};
+  const ws = S.ws[idx];
   const s = S.plan.sessions[idx];
-  S.ws[idx] = {
-    startTime: null,
-    endTime: null,
-    warmup: false,
-    physio: new Array((s.physio || []).length).fill(false),
-    laps: '', mins: '',
-    sets: (s.exercises || []).map(ex =>
+
+  if (ws.startTime  === undefined) ws.startTime  = null;
+  if (ws.endTime    === undefined) ws.endTime    = null;
+  if (ws.warmup     === undefined) ws.warmup     = false;
+  if (!ws.laps) ws.laps = '';
+  if (!ws.mins) ws.mins = '';
+
+  // Rebuild physio if missing or wrong length
+  const physioLen = (s.physio || []).length;
+  if (!Array.isArray(ws.physio) || ws.physio.length !== physioLen) {
+    ws.physio = new Array(physioLen).fill(false);
+  }
+
+  // Rebuild sets if missing or wrong exercise count
+  const exLen = (s.exercises || []).length;
+  if (!Array.isArray(ws.sets) || ws.sets.length !== exLen) {
+    ws.sets = (s.exercises || []).map(ex =>
       ex.sets.map(set => ({ w: set.weight, r: set.reps, done: false, warmup: !!set.warmup, drop: false }))
-    )
-  };
+    );
+  } else {
+    // Ensure each exercise's plan sets exist (preserve user edits & drop sets)
+    (s.exercises || []).forEach((ex, ei) => {
+      const existing = ws.sets[ei] || [];
+      const planSets = ex.sets.map((set, si) => ({
+        w:      existing[si] && !existing[si].drop ? existing[si].w      : set.weight,
+        r:      existing[si] && !existing[si].drop ? existing[si].r      : set.reps,
+        done:   existing[si] && !existing[si].drop ? existing[si].done   : false,
+        warmup: !!set.warmup,
+        drop:   false
+      }));
+      const dropSets = existing.filter(s => s.drop);
+      ws.sets[ei] = [...planSets, ...dropSets];
+    });
+  }
 }
 
 // ─────────────────────────────────────────────
@@ -397,7 +431,7 @@ function genSummary(idx) {
     lines.push(`Swim ${ws.laps||'?'} laps, ${ws.mins||'?'} minutes.`);
   } else {
     (s.exercises||[]).forEach((ex, ei) => {
-      const sets = ws.sets[ei];
+      const sets = (ws.sets && ws.sets[ei]) || [];
       const isBW = ex.sets[0]?.unit === 'BW';
       lines.push(ex.note ? `${ex.name} (${ex.note})` : ex.name);
       sets.forEach(set => {
@@ -506,7 +540,7 @@ function renderSession() {
 
     // Exercises
     const exHtml = (s.exercises||[]).map((ex, ei) => {
-      const sets = ws.sets[ei];
+      const sets = (ws.sets && ws.sets[ei]) || [];
       const isBW = ex.sets[0]?.unit === 'BW';
 
       const setRows = sets.map((set, si) => {
