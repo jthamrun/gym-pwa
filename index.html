@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Gym</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Gym">
+  <style>
+    :root {
+      --bg: #000;
+      --surface: #1c1c1e;
+      --surface2: #2c2c2e;
+      --border: rgba(255,255,255,.1);
+      --text: #fff;
+      --text2: rgba(235,235,245,.8);
+      --text3: rgba(235,235,245,.45);
+      --accent: #0a84ff;
+      --green: #30d158;
+      --red: #ff453a;
+      --orange: #ff9f0a;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bot: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    html, body { height: 100%; background: var(--bg); }
+    body {
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+      font-size: 16px;
+      line-height: 1.4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #app {
+      width: 100%;
+      max-width: 430px;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ── Header ── */
+    .hdr {
+      flex-shrink: 0;
+      background: rgba(0,0,0,.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: calc(var(--safe-top) + 10px) 16px 10px;
+    }
+    .hdr-row { display: flex; align-items: center; gap: 8px; min-height: 36px; }
+    .back-btn {
+      display: flex; align-items: center; gap: 3px;
+      background: none; border: none; color: var(--accent);
+      font-size: 16px; cursor: pointer; padding: 4px 0; flex-shrink: 0;
+    }
+    .hdr-title { font-size: 17px; font-weight: 600; flex: 1; text-align: center; }
+    .hdr-spacer { width: 60px; }
+
+    /* ── Scroll area ── */
+    .scroll {
+      flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch;
+      padding: 12px 16px calc(var(--safe-bot) + 80px);
+      display: flex; flex-direction: column; gap: 10px;
+    }
+
+    /* ── Cards ── */
+    .card { background: var(--surface); border-radius: 16px; overflow: hidden; }
+
+    /* ── Home ── */
+    .week-hd { text-align: center; margin-bottom: 4px; }
+    .week-hd h1 { font-size: 26px; font-weight: 700; }
+    .week-hd p  { font-size: 13px; color: var(--text3); }
+
+    .sess-card {
+      background: var(--surface); border-radius: 16px;
+      padding: 14px 16px; display: flex; align-items: center; gap: 12px;
+      cursor: pointer; transition: opacity .15s; user-select: none; -webkit-user-select: none;
+    }
+    .sess-card:active { opacity: .65; }
+    .sess-card.is-done { opacity: .45; }
+    .sess-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0;
+    }
+    .ic-legs  { background: rgba(255,159,10,.18); }
+    .ic-pull  { background: rgba(10,132,255,.18); }
+    .ic-push  { background: rgba(48,209,88,.18); }
+    .ic-upper { background: rgba(191,90,242,.18); }
+    .ic-swim  { background: rgba(50,173,230,.18); }
+    .ic-rest  { background: rgba(255,255,255,.08); }
+    .sess-info { flex: 1; }
+    .sess-type { font-size: 17px; font-weight: 600; }
+    .sess-day  { font-size: 13px; color: var(--text3); margin-top: 1px; }
+    .badge {
+      font-size: 11px; font-weight: 700; padding: 3px 9px;
+      border-radius: 20px; white-space: nowrap;
+    }
+    .badge-today { background: var(--accent); color: #fff; }
+    .badge-done  { background: var(--green); color: #000; }
+    .chevron { color: var(--text3); font-size: 18px; display: flex; align-items: center; }
+
+    /* ── Section label ── */
+    .sec-lbl {
+      font-size: 12px; font-weight: 600; color: var(--text3);
+      text-transform: uppercase; letter-spacing: .5px; padding: 0 4px;
+    }
+
+    /* ── Warm-up ── */
+    .warmup-row {
+      padding: 14px 16px; display: flex; align-items: center;
+      gap: 12px; cursor: pointer;
+    }
+    .warmup-txt { flex: 1; font-size: 15px; }
+
+    /* ── Exercise card ── */
+    .ex-card { background: var(--surface); border-radius: 16px; overflow: hidden; }
+    .ex-hdr {
+      padding: 13px 16px 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .ex-name { font-size: 16px; font-weight: 600; }
+    .ex-note { font-size: 13px; color: var(--text3); margin-top: 2px; }
+
+    /* ── Set row ── */
+    .set-row {
+      display: flex; align-items: center;
+      padding: 10px 14px 10px 16px;
+      border-bottom: 1px solid var(--border);
+      transition: background .2s;
+      gap: 0;
+    }
+    .set-row:last-of-type { border-bottom: none; }
+    .set-row.is-done { background: rgba(48,209,88,.09); }
+    .set-row.is-drop { background: rgba(255,159,10,.05); }
+
+    .set-num {
+      width: 32px; font-size: 12px; color: var(--text3);
+      font-weight: 600; flex-shrink: 0;
+    }
+    .set-num.wu-lbl { color: var(--orange); font-size: 11px; }
+
+    .set-w { display: flex; align-items: center; gap: 3px; flex: 1; }
+    .set-x  { color: var(--text3); font-size: 15px; padding: 0 8px; }
+    .set-r  { display: flex; align-items: center; gap: 3px; flex: 1; justify-content: flex-end; padding-right: 10px; }
+
+    .val {
+      font-size: 18px; font-weight: 600;
+      cursor: pointer; padding: 4px 6px; border-radius: 6px;
+      min-width: 38px; text-align: center;
+      transition: background .15s;
+    }
+    .val:active { background: var(--surface2); }
+    .val-unit { font-size: 13px; color: var(--text3); }
+    .val-bw   { font-size: 14px; color: var(--text3); font-weight: 500; padding: 4px 6px; }
+
+    .val-input {
+      font-size: 18px; font-weight: 600;
+      width: 64px; background: var(--surface2);
+      border: 1.5px solid var(--accent); border-radius: 6px;
+      color: var(--text); text-align: center;
+      padding: 4px 2px; outline: none;
+      -webkit-appearance: none; appearance: none;
+    }
+
+    .chk-btn {
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 2px solid var(--border); background: none;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: all .2s;
+    }
+    .chk-btn.on { background: var(--green); border-color: var(--green); }
+
+    /* ── Drop set button ── */
+    .drop-btn {
+      width: 100%; padding: 11px 16px;
+      background: none; border: none; border-top: 1px solid var(--border);
+      color: var(--accent); font-size: 14px; cursor: pointer;
+      display: flex; align-items: center; gap: 6px;
+      transition: background .15s;
+    }
+    .drop-btn:active { background: var(--surface2); }
+
+    /* ── Physio ── */
+    .physio-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 16px; cursor: pointer;
+      border-bottom: 1px solid var(--border);
+      transition: background .15s;
+    }
+    .physio-row:last-child { border-bottom: none; }
+    .physio-row:active { background: var(--surface2); }
+    .physio-txt { flex: 1; font-size: 15px; }
+    .physio-txt.struck { color: var(--text3); text-decoration: line-through; }
+
+    /* ── Checkbox ── */
+    .chkbox {
+      width: 24px; height: 24px; border-radius: 50%;
+      border: 2px solid var(--border); background: none;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: all .2s;
+    }
+    .chkbox.on { background: var(--green); border-color: var(--green); }
+
+    /* ── Swim inputs ── */
+    .swim-row {
+      display: flex; align-items: center;
+      padding: 14px 16px; gap: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .swim-row:last-child { border-bottom: none; }
+    .swim-lbl { flex: 1; font-size: 15px; }
+    .swim-input {
+      width: 80px; background: var(--surface2);
+      border: 1.5px solid var(--border); border-radius: 8px;
+      color: var(--text); text-align: center;
+      padding: 8px; font-size: 17px; font-weight: 600;
+      outline: none; -webkit-appearance: none; appearance: none;
+    }
+    .swim-input:focus { border-color: var(--accent); }
+
+    /* ── Primary button ── */
+    .btn-primary {
+      width: 100%; padding: 16px; background: var(--accent);
+      color: #fff; border: none; border-radius: 14px;
+      font-size: 17px; font-weight: 600; cursor: pointer;
+      transition: opacity .15s;
+    }
+    .btn-primary:active { opacity: .8; }
+
+    /* ── Summary ── */
+    .summary-box {
+      background: var(--surface); border-radius: 16px;
+      padding: 16px; font-family: 'SF Mono', Menlo, monospace;
+      font-size: 13px; line-height: 1.65; color: var(--text2);
+      white-space: pre-wrap; word-break: break-word;
+    }
+    .btn-copy {
+      width: 100%; padding: 16px; background: var(--surface);
+      color: var(--accent); border: none; border-radius: 14px;
+      font-size: 17px; font-weight: 600; cursor: pointer;
+      transition: background .15s;
+    }
+    .btn-copy:active { background: var(--surface2); }
+    .btn-copy.copied { color: var(--green); }
+
+    /* ── Timer bar ── */
+    .timer-bar {
+      position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 100%; max-width: 430px;
+      background: rgba(22,22,24,.97);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-top: 1px solid var(--border);
+      padding: 12px 20px calc(var(--safe-bot) + 12px);
+      display: flex; align-items: center; justify-content: space-between;
+      z-index: 200;
+    }
+    .timer-lbl  { font-size: 12px; color: var(--text3); margin-bottom: 1px; }
+    .timer-cnt  { font-size: 30px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -.5px; }
+    .timer-cnt.urgent { color: var(--red); }
+    .skip-btn {
+      background: var(--surface2); border: none; color: var(--text);
+      font-size: 14px; font-weight: 600; padding: 9px 18px;
+      border-radius: 20px; cursor: pointer; transition: background .15s;
+    }
+    .skip-btn:active { background: var(--border); }
+
+    /* ── Loading / error ── */
+    .center { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; gap: 14px; padding: 24px; text-align: center; }
+    .spinner { width: 32px; height: 32px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin .8s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .note-text { font-size: 14px; color: var(--text2); text-align: center; }
+  </style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+// ─────────────────────────────────────────────
+// ICONS
+// ─────────────────────────────────────────────
+const IC = {
+  check: `<svg width="14" height="11" viewBox="0 0 14 11" fill="none"><path d="M1 5.5 5.5 10 13 1" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  chkSm:`<svg width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5 4 7.5 10 1" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  back: `<svg width="9" height="15" viewBox="0 0 9 15" fill="none"><path d="M8 1 1.5 7.5 8 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  chev: `<svg width="7" height="12" viewBox="0 0 7 12" fill="none"><path d="M1 1l5 5-5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  plus: `<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`,
+};
+
+const SESSION_ICONS = { Legs:'🦵', Pull:'🏋️', Push:'💪', Upper:'🔄', Swim:'🏊', Rest:'😴' };
+const SESSION_IC_CLS = { Legs:'ic-legs', Pull:'ic-pull', Push:'ic-push', Upper:'ic-upper', Swim:'ic-swim', Rest:'ic-rest' };
+
+// ─────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────
+const TIMER_SECS = 120;
+
+const S = {
+  plan: null,
+  view: 'loading',   // loading | error | home | session | summary
+  err: null,
+  idx: null,         // active session index
+  ws: {},            // workout state keyed by session idx
+  timer: { on: false, secs: TIMER_SECS, tid: null },
+};
+
+// ─────────────────────────────────────────────
+// PERSISTENCE
+// ─────────────────────────────────────────────
+function save() {
+  try { localStorage.setItem('gym_ws', JSON.stringify(S.ws)); } catch(_) {}
+}
+function load() {
+  try { const d = localStorage.getItem('gym_ws'); if (d) S.ws = JSON.parse(d); } catch(_) {}
+}
+
+// ─────────────────────────────────────────────
+// SESSION STATE INIT
+// ─────────────────────────────────────────────
+function ensureWS(idx) {
+  if (S.ws[idx]) return;
+  const s = S.plan.sessions[idx];
+  S.ws[idx] = {
+    startTime: null,
+    endTime: null,
+    warmup: false,
+    physio: new Array((s.physio || []).length).fill(false),
+    laps: '', mins: '',
+    sets: (s.exercises || []).map(ex =>
+      ex.sets.map(set => ({ w: set.weight, r: set.reps, done: false, warmup: !!set.warmup, drop: false }))
+    )
+  };
+}
+
+// ─────────────────────────────────────────────
+// TIMER
+// ─────────────────────────────────────────────
+function timerStart() {
+  timerStop();
+  S.timer = { on: true, secs: TIMER_SECS, tid: setInterval(() => {
+    S.timer.secs--;
+    if (S.timer.secs <= 0) { timerStop(); beep(); }
+    else timerDraw();
+  }, 1000) };
+  timerDraw();
+}
+function timerStop() {
+  if (S.timer.tid) { clearInterval(S.timer.tid); S.timer.tid = null; }
+  S.timer.on = false;
+  timerDraw();
+}
+function timerFmt(s) { return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`; }
+function timerDraw() {
+  let el = document.getElementById('timer-bar');
+  if (!S.timer.on) { if (el) el.remove(); return; }
+  const urgent = S.timer.secs <= 10;
+  const html = `<div class="timer-bar" id="timer-bar">
+    <div><div class="timer-lbl">Rest</div>
+    <div class="timer-cnt ${urgent?'urgent':''}">${timerFmt(S.timer.secs)}</div></div>
+    <button class="skip-btn" onclick="timerStop()">Skip</button>
+  </div>`;
+  if (el) el.outerHTML = html; else document.body.insertAdjacentHTML('beforeend', html);
+}
+function beep() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    [[880,.0],[1100,.25]].forEach(([f,t]) => {
+      const o = ctx.createOscillator(), g = ctx.createGain();
+      o.connect(g); g.connect(ctx.destination);
+      o.frequency.value = f;
+      g.gain.setValueAtTime(.3, ctx.currentTime+t);
+      g.gain.exponentialRampToValueAtTime(.001, ctx.currentTime+t+.4);
+      o.start(ctx.currentTime+t); o.stop(ctx.currentTime+t+.4);
+    });
+  } catch(_) {}
+}
+
+// ─────────────────────────────────────────────
+// SUMMARY GENERATION
+// ─────────────────────────────────────────────
+function genSummary(idx) {
+  const s = S.plan.sessions[idx], ws = S.ws[idx];
+  const d = new Date(s.date);
+  const dd = String(d.getUTCDate()).padStart(2,'0');
+  const mm = String(d.getUTCMonth()+1).padStart(2,'0');
+  const yy = String(d.getUTCFullYear()).slice(2);
+  const dateStr = `${dd}-${mm}-${yy}`;
+
+  const lines = [];
+  if (s.type === 'Swim') {
+    lines.push(`Swim ${ws.laps||'?'} laps, ${ws.mins||'?'} minutes.`);
+  } else {
+    (s.exercises||[]).forEach((ex, ei) => {
+      const sets = ws.sets[ei];
+      const isBW = ex.sets[0]?.unit === 'BW';
+      lines.push(ex.note ? `${ex.name} (${ex.note})` : ex.name);
+      sets.forEach(set => {
+        if (set.warmup)    lines.push(`Warm up 1 x ${set.r} x ${set.w}kg`);
+        else if (isBW)     lines.push(String(set.r));
+        else               lines.push(`${set.w}kg x ${set.r}`);
+      });
+      lines.push('');
+    });
+  }
+  return `## ${s.type} — ${dateStr}\n\n${lines.join('\n').trimEnd()}`;
+}
+
+// ─────────────────────────────────────────────
+// RENDER UTILITIES
+// ─────────────────────────────────────────────
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function getSetNum(sets, i) {
+  let n = 0;
+  for (let j = 0; j <= i; j++) if (!sets[j].warmup) n++;
+  return n;
+}
+
+function todayStr() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+// ─────────────────────────────────────────────
+// RENDER: HOME
+// ─────────────────────────────────────────────
+function renderHome() {
+  const today = todayStr();
+  const cards = S.plan.sessions.map((s, i) => {
+    const ws = S.ws[i];
+    const done = !!ws?.endTime;
+    const isToday = s.date === today;
+    const clickable = s.type !== 'Rest';
+
+    let badge = '';
+    if (done)       badge = `<span class="badge badge-done">Done</span>`;
+    else if (isToday) badge = `<span class="badge badge-today">Today</span>`;
+
+    return `<div class="sess-card${done?' is-done':''}" ${clickable?`onclick="openSess(${i})"`:''}
+      role="${clickable?'button':''}" tabindex="${clickable?0:-1}">
+      <div class="sess-icon ${SESSION_IC_CLS[s.type]||'ic-rest'}">${SESSION_ICONS[s.type]||'🏋️'}</div>
+      <div class="sess-info">
+        <div class="sess-type">${s.type}</div>
+        <div class="sess-day">${s.dayLabel}</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        ${badge}
+        ${clickable?`<div class="chevron">${IC.chev}</div>`:''}
+      </div>
+    </div>`;
+  }).join('');
+
+  setHTML(`
+    <div class="hdr"><div class="hdr-row"><div class="hdr-title">Week of ${esc(S.plan.weekLabel)}</div></div></div>
+    <div class="scroll" id="scroll">
+      <div class="week-hd"><p>Current Week</p><h1>${esc(S.plan.weekLabel)}</h1></div>
+      ${cards}
+    </div>`);
+}
+
+// ─────────────────────────────────────────────
+// RENDER: SESSION
+// ─────────────────────────────────────────────
+function renderSession() {
+  const i = S.idx, s = S.plan.sessions[i], ws = S.ws[i];
+  if (!ws.startTime) { ws.startTime = Date.now(); save(); }
+
+  let body = '';
+  if (s.type === 'Swim') {
+    body = `
+      <div class="sec-lbl">Log Your Swim</div>
+      <div class="card">
+        <div class="swim-row">
+          <div class="swim-lbl">Laps</div>
+          <input class="swim-input" type="number" inputmode="numeric" value="${esc(ws.laps)}"
+            onchange="upSwim(${i},'laps',this.value)" placeholder="0">
+        </div>
+        <div class="swim-row">
+          <div class="swim-lbl">Minutes</div>
+          <input class="swim-input" type="number" inputmode="numeric" value="${esc(ws.mins)}"
+            onchange="upSwim(${i},'mins',this.value)" placeholder="0">
+        </div>
+      </div>
+      <button class="btn-primary" onclick="finishSess(${i})">Done</button>`;
+  } else if (s.type === 'Rest') {
+    body = `<div class="center" style="min-height:40vh">
+      <div style="font-size:56px">😴</div>
+      <p class="note-text">${esc(s.note||'Rest day!')}</p>
+    </div>`;
+  } else {
+    // Warm-up
+    const wu = s.warmup ? `
+      <div class="sec-lbl">Warm-up</div>
+      <div class="card">
+        <div class="warmup-row" onclick="togWarmup(${i})">
+          <div class="warmup-txt">${esc(s.warmup)}</div>
+          <div class="chkbox${ws.warmup?' on':''}">${ws.warmup?IC.chkSm:''}</div>
+        </div>
+      </div>` : '';
+
+    // Exercises
+    const exHtml = (s.exercises||[]).map((ex, ei) => {
+      const sets = ws.sets[ei];
+      const isBW = ex.sets[0]?.unit === 'BW';
+
+      const setRows = sets.map((set, si) => {
+        const numLabel = set.warmup
+          ? `<span class="set-num wu-lbl">WU</span>`
+          : `<span class="set-num">S${getSetNum(sets,si)}</span>`;
+
+        const wPart = isBW
+          ? `<span class="val-bw">BW</span>`
+          : `<span class="val" onclick="editVal(event,${i},${ei},${si},'w')">${set.w}</span><span class="val-unit">kg</span>`;
+
+        const cls = ['set-row', set.done?'is-done':'', set.drop?'is-drop':''].filter(Boolean).join(' ');
+        return `<div class="${cls}">
+          ${numLabel}
+          <div class="set-w">${wPart}</div>
+          <span class="set-x">×</span>
+          <div class="set-r">
+            <span class="val" onclick="editVal(event,${i},${ei},${si},'r')">${set.r}</span>
+          </div>
+          <button class="chk-btn${set.done?' on':''}" onclick="togSet(${i},${ei},${si})">
+            ${set.done?IC.check:''}
+          </button>
+        </div>`;
+      }).join('');
+
+      return `<div class="ex-card">
+        <div class="ex-hdr">
+          <div class="ex-name">${esc(ex.name)}</div>
+          ${ex.note?`<div class="ex-note">${esc(ex.note)}</div>`:''}
+        </div>
+        ${setRows}
+        <button class="drop-btn" onclick="addDrop(${i},${ei})">${IC.plus} Drop Set</button>
+      </div>`;
+    }).join('');
+
+    // Physio
+    const physHtml = (s.physio||[]).length ? `
+      <div class="sec-lbl">Physio / Mobility</div>
+      <div class="card">
+        ${(s.physio||[]).map((item,pi) => `
+          <div class="physio-row" onclick="togPhysio(${i},${pi})">
+            <div class="physio-txt${ws.physio[pi]?' struck':''}">${esc(item)}</div>
+            <div class="chkbox${ws.physio[pi]?' on':''}">${ws.physio[pi]?IC.chkSm:''}</div>
+          </div>`).join('')}
+      </div>` : '';
+
+    body = `${wu}
+      <div class="sec-lbl">Main Work</div>
+      ${exHtml}
+      ${physHtml}
+      <button class="btn-primary" onclick="finishSess(${i})">Finish Workout</button>`;
+  }
+
+  setHTML(`
+    <div class="hdr">
+      <div class="hdr-row">
+        <button class="back-btn" onclick="goHome()">${IC.back} Week</button>
+        <div class="hdr-title">${esc(s.type)}</div>
+        <div class="hdr-spacer"></div>
+      </div>
+    </div>
+    <div class="scroll" id="scroll">
+      <div class="note-text" style="margin-top:-2px">${esc(s.dayLabel)}</div>
+      ${body}
+    </div>`);
+
+  timerDraw();
+}
+
+// ─────────────────────────────────────────────
+// RENDER: SUMMARY
+// ─────────────────────────────────────────────
+function renderSummary() {
+  const summary = genSummary(S.idx);
+  setHTML(`
+    <div class="hdr">
+      <div class="hdr-row">
+        <button class="back-btn" onclick="backToSess()">${IC.back} Session</button>
+        <div class="hdr-title">Workout Done</div>
+        <div class="hdr-spacer"></div>
+      </div>
+    </div>
+    <div class="scroll" id="scroll">
+      <p class="note-text">Copy and paste into Claude to log this session and update Training State.</p>
+      <div class="summary-box">${esc(summary)}</div>
+      <button class="btn-copy" id="cpybtn" onclick="copySummary()">Copy to Clipboard</button>
+      <button class="btn-primary" onclick="goHome()">Back to Week</button>
+    </div>`);
+}
+
+// ─────────────────────────────────────────────
+// RENDER: ROOT
+// ─────────────────────────────────────────────
+function setHTML(html) {
+  const sy = document.getElementById('scroll')?.scrollTop || 0;
+  document.getElementById('app').innerHTML = html;
+  const sc = document.getElementById('scroll');
+  if (sc && sy) sc.scrollTop = sy;
+}
+
+function render() {
+  if (S.view==='loading') {
+    document.getElementById('app').innerHTML = `<div class="center"><div class="spinner"></div><p style="color:var(--text3)">Loading…</p></div>`;
+    return;
+  }
+  if (S.view==='error') {
+    document.getElementById('app').innerHTML = `<div class="center">
+      <div style="font-size:48px">⚠️</div>
+      <p style="font-weight:600">Could not load plan</p>
+      <p style="color:var(--text3);font-size:14px">${esc(S.err||'Check connection and try again.')}</p>
+      <button class="btn-primary" style="max-width:200px" onclick="loadPlan()">Retry</button>
+    </div>`;
+    return;
+  }
+  if (S.view==='home')    { renderHome();    return; }
+  if (S.view==='session') { renderSession(); return; }
+  if (S.view==='summary') { renderSummary(); return; }
+}
+
+// ─────────────────────────────────────────────
+// ACTIONS (global — called from onclick attrs)
+// ─────────────────────────────────────────────
+function openSess(i) {
+  S.idx = i;
+  ensureWS(i);
+  S.view = 'session';
+  render();
+}
+function goHome() {
+  timerStop();
+  S.view = 'home'; S.idx = null;
+  render();
+}
+function backToSess() {
+  S.view = 'session';
+  render();
+}
+function togWarmup(i) {
+  S.ws[i].warmup = !S.ws[i].warmup; save(); render();
+}
+function togSet(i, ei, si) {
+  const set = S.ws[i].sets[ei][si];
+  set.done = !set.done;
+  if (set.done) timerStart();
+  save(); render();
+}
+function togPhysio(i, pi) {
+  S.ws[i].physio[pi] = !S.ws[i].physio[pi]; save(); render();
+}
+function addDrop(i, ei) {
+  const sets = S.ws[i].sets[ei];
+  const last = sets[sets.length - 1];
+  sets.push({ w: last.w, r: last.r, done: false, warmup: false, drop: true });
+  save(); render();
+}
+function upSwim(i, field, val) {
+  S.ws[i][field] = val; save();
+}
+function finishSess(i) {
+  S.ws[i].endTime = Date.now(); save();
+  S.view = 'summary'; render();
+}
+function editVal(event, i, ei, si, field) {
+  event.stopPropagation();
+  const span = event.target;
+  const cur = S.ws[i].sets[ei][si][field];
+  const inp = document.createElement('input');
+  inp.type = 'number'; inp.className = 'val-input';
+  inp.value = cur; inp.inputMode = 'decimal';
+  inp.step = field === 'w' ? '2.5' : '1';
+  span.replaceWith(inp);
+  inp.focus(); inp.select();
+  const commit = () => {
+    const v = parseFloat(inp.value);
+    S.ws[i].sets[ei][si][field] = isNaN(v) ? cur : v;
+    save(); render();
+  };
+  inp.addEventListener('blur', commit);
+  inp.addEventListener('keydown', e => { if (e.key === 'Enter') inp.blur(); });
+}
+function copySummary() {
+  const text = genSummary(S.idx);
+  const btn = document.getElementById('cpybtn');
+  const ok = () => { if (btn) { btn.textContent = 'Copied!'; btn.classList.add('copied'); setTimeout(() => { btn.textContent = 'Copy to Clipboard'; btn.classList.remove('copied'); }, 2000); } };
+  if (navigator.clipboard?.writeText) {
+    navigator.clipboard.writeText(text).then(ok).catch(fallback);
+  } else { fallback(); }
+  function fallback() {
+    const ta = Object.assign(document.createElement('textarea'), { value: text, style: 'position:fixed;opacity:0' });
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove(); ok();
+  }
+}
+
+// ─────────────────────────────────────────────
+// LOAD
+// ─────────────────────────────────────────────
+async function loadPlan() {
+  S.view = 'loading'; render();
+  try {
+    const res = await fetch('./plan.json?_=' + Date.now());
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    S.plan = await res.json();
+    S.view = 'home';
+  } catch(e) {
+    S.err = e.message; S.view = 'error';
+  }
+  render();
+}
+
+// ─────────────────────────────────────────────
+// BOOT
+// ─────────────────────────────────────────────
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(() => {});
+}
+load();
+loadPlan();
+</script>
+</body>
+</html>
