@@ -12,6 +12,7 @@
       "exercises": [
         {
           "name": "DB Goblet Squats",
+          "lastPerf": "17.5 kg × 3×10",
           "sets": [
             {"weight": 17.5, "reps": 10, "unit": "kg"},
             {"weight": 17.5, "reps": 10, "unit": "kg"},
@@ -21,15 +22,17 @@
         {
           "name": "Bulgarian Split Squats",
           "note": "per leg",
+          "lastPerf": "10 kg × 1×10 (incomplete)",
           "sets": [
-            {"weight": 12.5, "reps": 10, "unit": "kg"},
-            {"weight": 12.5, "reps": 10, "unit": "kg"},
-            {"weight": 12.5, "reps": 10, "unit": "kg"}
+            {"weight": 10, "reps": 10, "unit": "kg"},
+            {"weight": 10, "reps": 10, "unit": "kg"},
+            {"weight": 10, "reps": 10, "unit": "kg"}
           ]
         },
         {
           "name": "Romanian Deadlifts",
           "note": "each hand",
+          "lastPerf": "17.5 kg × 3×10",
           "sets": [
             {"weight": 17.5, "reps": 10, "unit": "kg"},
             {"weight": 17.5, "reps": 10, "unit": "kg"},
@@ -38,6 +41,7 @@
         },
         {
           "name": "Leg Extensions",
+          "lastPerf": "25 kg × 3×12",
           "sets": [
             {"weight": 25, "reps": 12, "unit": "kg"},
             {"weight": 25, "reps": 12, "unit": "kg"},
@@ -47,6 +51,7 @@
         {
           "name": "Standing DB Calf Raises",
           "note": "each hand",
+          "lastPerf": "15 kg × 3×15",
           "sets": [
             {"weight": 17.5, "reps": 15, "unit": "kg"},
             {"weight": 17.5, "reps": 15, "unit": "kg"},
@@ -73,6 +78,7 @@
       "exercises": [
         {
           "name": "Pull-ups",
+          "lastPerf": "7 / 8 / 6 BW",
           "sets": [
             {"weight": 0, "reps": 8, "unit": "BW"},
             {"weight": 0, "reps": 8, "unit": "BW"},
@@ -82,6 +88,7 @@
         {
           "name": "Barbell Rows",
           "note": "per side",
+          "lastPerf": "10 kg × 12, 12.5 kg × 10 / 10",
           "sets": [
             {"weight": 12.5, "reps": 12, "unit": "kg"},
             {"weight": 12.5, "reps": 12, "unit": "kg"},
@@ -90,6 +97,7 @@
         },
         {
           "name": "Single-arm DB Rows",
+          "lastPerf": "22.5 kg × 3×12",
           "sets": [
             {"weight": 22.5, "reps": 12, "unit": "kg"},
             {"weight": 22.5, "reps": 12, "unit": "kg"},
@@ -98,6 +106,7 @@
         },
         {
           "name": "Face Pulls",
+          "lastPerf": "30 kg × 3×15",
           "sets": [
             {"weight": 32.5, "reps": 15, "unit": "kg"},
             {"weight": 32.5, "reps": 15, "unit": "kg"},
@@ -106,6 +115,7 @@
         },
         {
           "name": "Hammer Curls",
+          "lastPerf": "12.5 kg × 3×12",
           "sets": [
             {"weight": 15, "reps": 12, "unit": "kg"},
             {"weight": 15, "reps": 12, "unit": "kg"},
@@ -141,6 +151,7 @@
       "exercises": [
         {
           "name": "Incline BB Bench",
+          "lastPerf": "WU 15 kg × 8, 20 kg × 8 / 6, 17.5 kg × 7",
           "sets": [
             {"weight": 15, "reps": 8, "unit": "kg", "warmup": true},
             {"weight": 20, "reps": 8, "unit": "kg"},
@@ -150,6 +161,7 @@
         },
         {
           "name": "Flat BB Bench",
+          "lastPerf": "20 kg × 7 / 6 / 5",
           "sets": [
             {"weight": 20, "reps": 7, "unit": "kg"},
             {"weight": 20, "reps": 7, "unit": "kg"},
@@ -158,6 +170,7 @@
         },
         {
           "name": "DB Shoulder Press",
+          "lastPerf": "15 kg × 3×10",
           "sets": [
             {"weight": 17.5, "reps": 10, "unit": "kg"},
             {"weight": 17.5, "reps": 10, "unit": "kg"},
@@ -166,6 +179,7 @@
         },
         {
           "name": "Lateral Raises",
+          "lastPerf": "5 kg × 3×15",
           "sets": [
             {"weight": 6, "reps": 15, "unit": "kg"},
             {"weight": 6, "reps": 15, "unit": "kg"},
@@ -174,6 +188,7 @@
         },
         {
           "name": "Tricep Pushdowns",
+          "lastPerf": "45 kg × 3×10",
           "sets": [
             {"weight": 45, "reps": 12, "unit": "kg"},
             {"weight": 45, "reps": 12, "unit": "kg"},
@@ -206,6 +221,7 @@
       "exercises": [
         {
           "name": "Pull-ups",
+          "lastPerf": "8 / 8 / 8 BW",
           "sets": [
             {"weight": 0, "reps": 10, "unit": "BW"},
             {"weight": 0, "reps": 10, "unit": "BW"},
@@ -214,6 +230,7 @@
         },
         {
           "name": "Machine Rows",
+          "lastPerf": "40 kg × 10, 47.5 kg × 8 / 8",
           "sets": [
             {"weight": 47.5, "reps": 8, "unit": "kg"},
             {"weight": 47.5, "reps": 8, "unit": "kg"},
@@ -222,6 +239,7 @@
         },
         {
           "name": "DB Bench Press",
+          "lastPerf": "22.5 kg × 3×12",
           "sets": [
             {"weight": 22.5, "reps": 12, "unit": "kg"},
             {"weight": 22.5, "reps": 12, "unit": "kg"},
@@ -230,6 +248,7 @@
         },
         {
           "name": "DB Shoulder Press",
+          "lastPerf": "15 kg × 3×12",
           "sets": [
             {"weight": 17.5, "reps": 12, "unit": "kg"},
             {"weight": 17.5, "reps": 12, "unit": "kg"},
@@ -238,6 +257,7 @@
         },
         {
           "name": "Face Pulls",
+          "lastPerf": "25 kg × 3×15",
           "sets": [
             {"weight": 27.5, "reps": 15, "unit": "kg"},
             {"weight": 27.5, "reps": 15, "unit": "kg"},
@@ -246,6 +266,7 @@
         },
         {
           "name": "Lateral Raises",
+          "lastPerf": "5 kg × 3×15",
           "sets": [
             {"weight": 6, "reps": 15, "unit": "kg"},
             {"weight": 6, "reps": 15, "unit": "kg"},
@@ -254,6 +275,7 @@
         },
         {
           "name": "Hammer Curls",
+          "lastPerf": "15 kg × 9 / 8 / 8",
           "sets": [
             {"weight": 15, "reps": 10, "unit": "kg"},
             {"weight": 15, "reps": 10, "unit": "kg"},
@@ -262,6 +284,7 @@
         },
         {
           "name": "Tricep Pushdowns",
+          "lastPerf": "45 kg × 3×12",
           "sets": [
             {"weight": 47.5, "reps": 12, "unit": "kg"},
             {"weight": 47.5, "reps": 12, "unit": "kg"},
