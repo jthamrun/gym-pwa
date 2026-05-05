@@ -615,12 +615,15 @@ function renderSession() {
 // RENDER: SUMMARY
 // ─────────────────────────────────────────────
 function renderSummary() {
+  const ws = S.ws[S.idx];
+  const justFinished = ws?.endTime && (Date.now() - ws.endTime) < 30000;
+  const title = justFinished ? 'Workout Done' : 'Session Log';
   const summary = genSummary(S.idx);
   setHTML(`
     <div class="hdr">
       <div class="hdr-row">
-        <button class="back-btn" onclick="backToSess()">${IC.back} Session</button>
-        <div class="hdr-title">Workout Done</div>
+        <button class="back-btn" onclick="goHome()">${IC.back} Week</button>
+        <div class="hdr-title">${title}</div>
         <div class="hdr-spacer"></div>
       </div>
     </div>
@@ -665,20 +668,24 @@ function render() {
 // ACTIONS (global — called from onclick attrs)
 // ─────────────────────────────────────────────
 function openSess(i) {
-  S.idx = i;
   ensureWS(i);
-  S.view = 'session';
+  S.idx = i;
+  if (S.ws[i]?.endTime) {
+    S.view = 'summary';
+    history.pushState({ view: 'summary', idx: i }, '', '#sum/' + i);
+  } else {
+    S.view = 'session';
+    history.pushState({ view: 'session', idx: i }, '', '#s/' + i);
+  }
   render();
 }
 function goHome() {
   timerStop();
   S.view = 'home'; S.idx = null;
+  history.pushState({ view: 'home', idx: null }, '', '#');
   render();
 }
-function backToSess() {
-  S.view = 'session';
-  render();
-}
+function backToSess() { history.back(); }
 function togWarmup(i) {
   S.ws[i].warmup = !S.ws[i].warmup; save(); render();
 }
@@ -702,7 +709,9 @@ function upSwim(i, field, val) {
 }
 function finishSess(i) {
   S.ws[i].endTime = Date.now(); save();
-  S.view = 'summary'; render();
+  S.idx = i; S.view = 'summary';
+  history.pushState({ view: 'summary', idx: i }, '', '#sum/' + i);
+  render();
 }
 function editVal(event, i, ei, si, field) {
   event.stopPropagation();
@@ -752,12 +761,29 @@ async function loadPlan() {
 }
 
 // ─────────────────────────────────────────────
+// POPSTATE (browser back / iOS swipe-back)
+// ─────────────────────────────────────────────
+window.addEventListener('popstate', (e) => {
+  timerStop();
+  const st = e.state;
+  if (st) {
+    S.view = st.view || 'home';
+    S.idx  = st.idx  ?? null;
+    if (S.idx !== null) ensureWS(S.idx);
+  } else {
+    S.view = 'home'; S.idx = null;
+  }
+  render();
+});
+
+// ─────────────────────────────────────────────
 // BOOT
 // ─────────────────────────────────────────────
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js').catch(() => {});
 }
 load();
+history.replaceState({ view: 'home', idx: null }, '', location.href);
 loadPlan();
 </script>
 </body>
