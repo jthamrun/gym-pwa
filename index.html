@@ -249,6 +249,7 @@ function ensureWS(idx) {
   const s  = S.plan.sessions[idx];
   if (ws.startTime  === undefined) ws.startTime  = null;
   if (ws.endTime    === undefined) ws.endTime    = null;
+  if (!ws.endTime && s.done) ws.endTime = -1;
   if (ws.warmup     === undefined) ws.warmup     = false;
   if (!ws.laps) ws.laps = '';
   if (!ws.mins) ws.mins = '';
@@ -407,7 +408,7 @@ function setHTML(html) {
 function renderHome() {
   const today=todayStr();
   const cards=S.plan.sessions.map((s,i)=>{
-    const ws=S.ws[i]; const done=!!ws?.endTime;
+    const ws=S.ws[i]; const done=!!ws?.endTime||!!s.done;
     const isToday=s.date===today; const isPast=s.date<today;
     const clickable=s.type!=='Rest';
     let badge='';

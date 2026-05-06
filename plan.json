@@ -8,6 +8,7 @@
       "date": "2026-05-04",
       "dayLabel": "Mon 4 May",
       "type": "Legs",
+      "done": true,
       "warmup": "Incline treadmill walk/jog — 10–15 min",
       "exercises": [
         {
@@ -74,6 +75,7 @@
       "date": "2026-05-05",
       "dayLabel": "Tue 5 May",
       "type": "Pull",
+      "done": true,
       "warmup": "Incline treadmill walk/jog — 10–15 min",
       "exercises": [
         {
