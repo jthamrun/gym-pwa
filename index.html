@@ -464,9 +464,9 @@ function renderHome() {
     </div>`;
   }).join('');
   setHTML(`
-    <div class="hdr"><div class="hdr-row"><div class="hdr-title">Week of ${esc(S.plan.weekLabel)}</div></div></div>
+    <div class="hdr"><div class="hdr-row"><div class="hdr-title">Plan: ${esc(S.plan.weekLabel)}</div></div></div>
     <div class="scroll" id="scroll">
-      <div style="text-align:center"><span style="font-size:13px;color:var(--text3)">Current Week</span>
+      <div style="text-align:center"><span style="font-size:13px;color:var(--text3)">Current Block</span>
       <div style="font-size:26px;font-weight:700;margin-top:2px">${esc(S.plan.weekLabel)}</div></div>
       ${cards}
     </div>`);

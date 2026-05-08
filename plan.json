@@ -1,6 +1,6 @@
 {
   "week": "2026-05-04",
-  "weekLabel": "May 4–10, 2026",
+  "weekLabel": "May 4–13, 2026",
   "generated": "2026-05-04",
   "sessions": [
     {
@@ -322,7 +322,91 @@
       "date": "2026-05-10",
       "dayLabel": "Sun 10 May",
       "type": "Rest",
-      "note": "Rest or optional 3rd swim if energy is good."
+      "note": "Rest day."
+    },
+    {
+      "id": "legs2-2026-05-11",
+      "date": "2026-05-11",
+      "dayLabel": "Mon 11 May",
+      "type": "Legs",
+      "warmup": "Incline treadmill walk/jog — 10–15 min",
+      "exercises": [
+        {
+          "name": "DB Goblet Squats",
+          "db": true,
+          "lastPerf": "17.5 kg × 3×10",
+          "sets": [
+            {"weight": 20, "reps": 10, "unit": "kg"},
+            {"weight": 20, "reps": 10, "unit": "kg"},
+            {"weight": 20, "reps": 10, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "Bulgarian Split Squats",
+          "db": true,
+          "note": "per leg",
+          "lastPerf": "10 kg × 1×10 (incomplete)",
+          "sets": [
+            {"weight": 10, "reps": 10, "unit": "kg"},
+            {"weight": 10, "reps": 10, "unit": "kg"},
+            {"weight": 10, "reps": 10, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "Romanian Deadlifts",
+          "db": true,
+          "note": "each hand",
+          "lastPerf": "17.5 kg × 3×10",
+          "sets": [
+            {"weight": 20, "reps": 10, "unit": "kg"},
+            {"weight": 20, "reps": 10, "unit": "kg"},
+            {"weight": 20, "reps": 10, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "Leg Extensions",
+          "lastPerf": "25 kg × 3×12",
+          "sets": [
+            {"weight": 27.5, "reps": 12, "unit": "kg"},
+            {"weight": 27.5, "reps": 12, "unit": "kg"},
+            {"weight": 27.5, "reps": 12, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "Standing DB Calf Raises",
+          "db": true,
+          "note": "each hand",
+          "lastPerf": "15 kg × 3×15",
+          "sets": [
+            {"weight": 17.5, "reps": 15, "unit": "kg"},
+            {"weight": 17.5, "reps": 15, "unit": "kg"},
+            {"weight": 17.5, "reps": 15, "unit": "kg"}
+          ]
+        }
+      ],
+      "physio": [
+        "Chin tucks × 15",
+        "Cat-cow × 10",
+        "Cervical side bends (20–30 sec each side)",
+        "Upper trap stretch (20–30 sec each side)",
+        "Levator scapulae stretch (20–30 sec each side)",
+        "Thoracic extension over bench edge — 10 reps",
+        "Dead hang — 20–30 sec"
+      ]
+    },
+    {
+      "id": "swim-2026-05-12",
+      "date": "2026-05-12",
+      "dayLabel": "Tue 12 May",
+      "type": "Swim",
+      "note": "20–40 laps depending on energy. Optional cable crunches or core work before/after."
+    },
+    {
+      "id": "rest-2026-05-13",
+      "date": "2026-05-13",
+      "dayLabel": "Wed 13 May",
+      "type": "Rest",
+      "note": "End of 10-day block. Rest before next block begins Thu 14 May."
     }
   ]
 }
