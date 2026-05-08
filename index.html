@@ -580,6 +580,9 @@ function renderSwim(s,ws,i) {
           onchange="upSwim(${i},'mins',this.value)" placeholder="0">
       </div>
     </div>
+    <div class="sec-lbl">Notes</div>
+    <div class="card"><textarea class="notes-area" placeholder="How it felt, anything to flag…"
+      oninput="upNotes(${i},this.value)">${esc(ws.notes||'')}</textarea></div>
     <button class="btn-primary" onclick="finishSess(${i})">Done</button>`;
 }
 
