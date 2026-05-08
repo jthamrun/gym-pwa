@@ -150,6 +150,7 @@
       "date": "2026-05-07",
       "dayLabel": "Thu 7 May",
       "type": "Push",
+      "done": true,
       "warmup": "Incline treadmill walk/jog — 10–15 min",
       "exercises": [
         {
