@@ -13,6 +13,7 @@
       "exercises": [
         {
           "name": "DB Goblet Squats",
+          "db": true,
           "lastPerf": "17.5 kg × 3×10",
           "sets": [
             {"weight": 17.5, "reps": 10, "unit": "kg"},
@@ -22,6 +23,7 @@
         },
         {
           "name": "Bulgarian Split Squats",
+          "db": true,
           "note": "per leg",
           "lastPerf": "10 kg × 1×10 (incomplete)",
           "sets": [
@@ -32,6 +34,7 @@
         },
         {
           "name": "Romanian Deadlifts",
+          "db": true,
           "note": "each hand",
           "lastPerf": "17.5 kg × 3×10",
           "sets": [
@@ -51,6 +54,7 @@
         },
         {
           "name": "Standing DB Calf Raises",
+          "db": true,
           "note": "each hand",
           "lastPerf": "15 kg × 3×15",
           "sets": [
@@ -99,6 +103,7 @@
         },
         {
           "name": "Single-arm DB Rows",
+          "db": true,
           "lastPerf": "22.5 kg × 3×12",
           "sets": [
             {"weight": 22.5, "reps": 12, "unit": "kg"},
@@ -117,6 +122,7 @@
         },
         {
           "name": "Hammer Curls",
+          "db": true,
           "lastPerf": "12.5 kg × 3×12",
           "sets": [
             {"weight": 15, "reps": 12, "unit": "kg"},
@@ -174,6 +180,7 @@
         },
         {
           "name": "DB Shoulder Press",
+          "db": true,
           "lastPerf": "15 kg × 3×10",
           "sets": [
             {"weight": 17.5, "reps": 10, "unit": "kg"},
@@ -183,11 +190,12 @@
         },
         {
           "name": "Lateral Raises",
+          "db": true,
           "lastPerf": "5 kg × 3×15",
           "sets": [
-            {"weight": 6, "reps": 15, "unit": "kg"},
-            {"weight": 6, "reps": 15, "unit": "kg"},
-            {"weight": 6, "reps": 15, "unit": "kg"}
+            {"weight": 7.5, "reps": 15, "unit": "kg"},
+            {"weight": 7.5, "reps": 15, "unit": "kg"},
+            {"weight": 7.5, "reps": 15, "unit": "kg"}
           ]
         },
         {
@@ -243,6 +251,7 @@
         },
         {
           "name": "DB Bench Press",
+          "db": true,
           "lastPerf": "22.5 kg × 3×12",
           "sets": [
             {"weight": 22.5, "reps": 12, "unit": "kg"},
@@ -252,6 +261,7 @@
         },
         {
           "name": "DB Shoulder Press",
+          "db": true,
           "lastPerf": "15 kg × 3×12",
           "sets": [
             {"weight": 17.5, "reps": 12, "unit": "kg"},
@@ -270,15 +280,17 @@
         },
         {
           "name": "Lateral Raises",
+          "db": true,
           "lastPerf": "5 kg × 3×15",
           "sets": [
-            {"weight": 6, "reps": 15, "unit": "kg"},
-            {"weight": 6, "reps": 15, "unit": "kg"},
-            {"weight": 6, "reps": 15, "unit": "kg"}
+            {"weight": 7.5, "reps": 15, "unit": "kg"},
+            {"weight": 7.5, "reps": 15, "unit": "kg"},
+            {"weight": 7.5, "reps": 15, "unit": "kg"}
           ]
         },
         {
           "name": "Hammer Curls",
+          "db": true,
           "lastPerf": "15 kg × 9 / 8 / 8",
           "sets": [
             {"weight": 15, "reps": 10, "unit": "kg"},

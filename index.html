@@ -73,6 +73,9 @@
     .ex-meta { display:flex; gap:8px; margin-top:3px; flex-wrap:wrap; }
     .ex-note  { font-size:12px; color:var(--text3); }
     .ex-last  { font-size:12px; color:var(--accent); opacity:.7; }
+    .ex-cross { font-size:12px; color:var(--orange); opacity:.85; }
+    .notes-area { width:100%; min-height:90px; background:none; border:none; color:var(--text2);
+      font-size:15px; padding:14px 16px; resize:none; outline:none; font-family:inherit; line-height:1.5; }
 
     /* Set row */
     .set-row { display:flex; align-items:center; padding:9px 14px 9px 16px;
@@ -253,6 +256,7 @@ function ensureWS(idx) {
   if (ws.warmup     === undefined) ws.warmup     = false;
   if (!ws.laps) ws.laps = '';
   if (!ws.mins) ws.mins = '';
+  if (ws.notes === undefined) ws.notes = '';
   const physioLen = (s.physio||[]).length;
   if (!Array.isArray(ws.physio) || ws.physio.length !== physioLen)
     ws.physio = new Array(physioLen).fill(false);
@@ -294,7 +298,7 @@ function timerTick() {
     S.timer.expired = true;
     clearInterval(S.timer.tid); S.timer.tid = null;
     localStorage.removeItem('gym_timer');
-    beep();
+    beep(); notifyDone();
     timerDraw();
     // Auto-hide the "done" banner after 4 seconds
     setTimeout(() => { S.timer.expired = false; timerDraw(); }, 4000);
@@ -331,6 +335,14 @@ function timerDraw() {
   const html = `<div class="timer-bar" id="timer-bar">${inner}</div>`;
   if (el) el.outerHTML = html; else document.body.insertAdjacentHTML('beforeend', html);
 }
+function requestNotifPerm() {
+  if ('Notification' in window && Notification.permission === 'default')
+    Notification.requestPermission();
+}
+function notifyDone() {
+  if (!('Notification' in window) || Notification.permission !== 'granted') return;
+  try { new Notification('Rest done! 💪', { body: 'Time to hit the next set.', icon: './icon.svg' }); } catch(_) {}
+}
 function beep() {
   try {
     const ctx = new (window.AudioContext||window.webkitAudioContext)();
@@ -356,7 +368,7 @@ document.addEventListener('visibilitychange', () => {
       if (endAt && Date.now() >= endAt) {
         localStorage.removeItem('gym_timer');
         S.timer.expired = true;
-        beep();
+        beep(); notifyDone();
         timerDraw();
         setTimeout(()=>{ S.timer.expired=false; timerDraw(); }, 4000);
       }
@@ -386,7 +398,25 @@ function genSummary(idx) {
       lines.push('');
     });
   }
-  return `## ${s.type} — ${dd}-${mm}-${yy}\n\n${lines.join('\n').trimEnd()}`;
+  const notesSuffix = ws.notes?.trim() ? `\n\nNotes: ${ws.notes.trim()}` : '';
+  return `## ${s.type} — ${dd}-${mm}-${yy}\n\n${lines.join('\n').trimEnd()}${notesSuffix}`;
+}
+
+// ── Cross-reference ────────────────────────────────────────
+function findCrossRef(sessIdx, exName) {
+  const results = [];
+  S.plan.sessions.forEach((sess, si) => {
+    if (si === sessIdx || !sess.exercises || !S.ws[si]?.endTime) return;
+    const ei = sess.exercises.findIndex(e => e.name === exName);
+    if (ei === -1) return;
+    const sets = (S.ws[si].sets?.[ei] || []).filter(s => !s.warmup && !s.drop);
+    if (!sets.length) return;
+    const isBW = sess.exercises[ei].sets[0]?.unit === 'BW';
+    const perf = isBW ? sets.map(s => s.r).join(' / ')
+      : sets.map(s => `${s.w}×${s.r}`).join(' / ');
+    results.push(`${sess.type}: ${perf}`);
+  });
+  return results;
 }
 
 // ── Render helpers ─────────────────────────────────────────
@@ -508,6 +538,7 @@ function renderGym(s,ws,i) {
     const metaParts=[];
     if (ex.note)     metaParts.push(`<span class="ex-note">${esc(ex.note)}</span>`);
     if (ex.lastPerf) metaParts.push(`<span class="ex-last">Last: ${esc(ex.lastPerf)}</span>`);
+    findCrossRef(i, ex.name).forEach(r => metaParts.push(`<span class="ex-cross">${esc(r)}</span>`));
     return `<div class="ex-card">
       <div class="ex-hdr">
         <div class="ex-name">${esc(ex.name)}</div>
@@ -527,7 +558,11 @@ function renderGym(s,ws,i) {
       </div>`).join('')}
     </div>`:'';
 
-  return `${wu}<div class="sec-lbl">Main Work</div>${exHtml}${physHtml}
+  const notesHtml=`
+    <div class="sec-lbl">Notes</div>
+    <div class="card"><textarea class="notes-area" placeholder="Modifications, how you felt, anything…"
+      oninput="upNotes(${i},this.value)">${esc(ws.notes||'')}</textarea></div>`;
+  return `${wu}<div class="sec-lbl">Main Work</div>${exHtml}${physHtml}${notesHtml}
     <button class="btn-primary" onclick="finishSess(${i})">Finish Workout</button>`;
 }
 
@@ -589,6 +624,7 @@ function render() {
 
 // ── Actions ────────────────────────────────────────────────
 function openSess(i) {
+  requestNotifPerm();
   ensureWS(i); S.idx=i;
   if (S.ws[i]?.endTime) {
     S.view='summary';
@@ -626,10 +662,16 @@ function addDrop(i,ei) {
   save(); render();
 }
 function upSwim(i,field,val) { S.ws[i][field]=val; save(); }
+function upNotes(i,val) { S.ws[i].notes=val; save(); }
 function stepVal(i,ei,si,field,delta) {
   const set=S.ws[i].sets[ei][si];
+  const isDB=!!S.plan.sessions[i].exercises?.[ei]?.db;
   let v=(set[field]||0)+delta;
-  if (field==='w') v=Math.max(0,Math.round(v*4)/4);  // round to 0.25kg
+  if (field==='w') {
+    v=Math.round(v*4)/4;
+    if (isDB) v=Math.min(22.5,Math.max(2.5,Math.round(v/2.5)*2.5));
+    else v=Math.max(0,v);
+  }
   if (field==='r') v=Math.max(1,Math.round(v));
   set[field]=v; save(); render();
 }
