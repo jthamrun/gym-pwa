@@ -74,7 +74,7 @@
     .ex-note  { font-size:12px; color:var(--text3); }
     .ex-last  { font-size:12px; color:var(--accent); opacity:.7; }
     .ex-cross { font-size:12px; color:var(--orange); opacity:.85; }
-    .notes-area { width:100%; min-height:90px; background:none; border:none; color:var(--text2);
+    .notes-area { width:100%; min-height:50px; overflow:hidden; background:none; border:none; color:var(--text2);
       font-size:15px; padding:14px 16px; resize:none; outline:none; font-family:inherit; line-height:1.5; }
 
     /* Set row */
@@ -496,6 +496,9 @@ function renderSession() {
     const sc=document.getElementById('scroll');
     const first=document.querySelector('.set-row:not(.is-done)');
     if (sc&&first) sc.scrollTop=Math.max(0,first.offsetTop-sc.offsetTop-70);
+    document.querySelectorAll('.notes-area').forEach(el=>{
+      el.style.height='auto'; el.style.height=el.scrollHeight+'px';
+    });
   });
 }
 
@@ -561,7 +564,7 @@ function renderGym(s,ws,i) {
   const notesHtml=`
     <div class="sec-lbl">Notes</div>
     <div class="card"><textarea class="notes-area" placeholder="Modifications, how you felt, anything…"
-      oninput="upNotes(${i},this.value)">${esc(ws.notes||'')}</textarea></div>`;
+      oninput="upNotes(${i},this.value,this)">${esc(ws.notes||'')}</textarea></div>`;
   return `${wu}<div class="sec-lbl">Main Work</div>${exHtml}${physHtml}${notesHtml}
     <button class="btn-primary" onclick="finishSess(${i})">Finish Workout</button>`;
 }
@@ -582,7 +585,7 @@ function renderSwim(s,ws,i) {
     </div>
     <div class="sec-lbl">Notes</div>
     <div class="card"><textarea class="notes-area" placeholder="How it felt, anything to flag…"
-      oninput="upNotes(${i},this.value)">${esc(ws.notes||'')}</textarea></div>
+      oninput="upNotes(${i},this.value,this)">${esc(ws.notes||'')}</textarea></div>
     <button class="btn-primary" onclick="finishSess(${i})">Done</button>`;
 }
 
@@ -665,7 +668,10 @@ function addDrop(i,ei) {
   save(); render();
 }
 function upSwim(i,field,val) { S.ws[i][field]=val; save(); }
-function upNotes(i,val) { S.ws[i].notes=val; save(); }
+function upNotes(i,val,el) {
+  S.ws[i].notes=val; save();
+  if (el) { el.style.height='auto'; el.style.height=el.scrollHeight+'px'; }
+}
 function stepVal(i,ei,si,field,delta) {
   const set=S.ws[i].sets[ei][si];
   const isDB=!!S.plan.sessions[i].exercises?.[ei]?.db;
