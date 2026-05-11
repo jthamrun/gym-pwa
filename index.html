@@ -531,8 +531,12 @@ function renderGym(s,ws,i) {
         <button class="step-btn" onclick="stepVal(${i},${ei},${si},'r',1)">+</button>
       </div>`;
       const cls=['set-row',set.done?'is-done':'',set.drop?'is-drop':''].filter(Boolean).join(' ');
+      const removeDrop=set.drop
+        ?`<button onclick="removeDropSet(${i},${ei},${si})" style="background:none;border:none;color:var(--red);font-size:18px;padding:0 4px;cursor:pointer;flex-shrink:0">×</button>`
+        :'';
       return `<div class="${cls}">
         ${numLbl}${wPart}<span class="set-x">×</span>${rPart}
+        ${removeDrop}
         <button class="chk-btn${set.done?' on':''}" onclick="togSet(${i},${ei},${si})">
           ${set.done?IC.check:''}
         </button>
@@ -666,6 +670,9 @@ function addDrop(i,ei) {
   const sets=S.ws[i].sets[ei], last=sets[sets.length-1];
   sets.push({w:last.w,r:last.r,done:false,warmup:false,drop:true});
   save(); render();
+}
+function removeDropSet(i,ei,si) {
+  S.ws[i].sets[ei].splice(si,1); save(); render();
 }
 function upSwim(i,field,val) { S.ws[i][field]=val; save(); }
 function upNotes(i,val,el) {
