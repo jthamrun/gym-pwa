@@ -324,6 +324,7 @@
       "date": "2026-05-10",
       "dayLabel": "Sun 10 May",
       "type": "Rest",
+      "done": true,
       "note": "Rest day."
     },
     {
@@ -331,6 +332,7 @@
       "date": "2026-05-11",
       "dayLabel": "Mon 11 May",
       "type": "Legs",
+      "done": true,
       "warmup": "Incline treadmill walk/jog — 10–15 min",
       "exercises": [
         {
