@@ -1,6 +1,6 @@
 {
   "week": "2026-05-14",
-  "weekLabel": "May 14–23, 2026",
+  "weekLabel": "May 14 – May 31, 2026",
   "generated": "2026-05-14",
   "sessions": [
     {
@@ -73,17 +73,9 @@
       ]
     },
     {
-      "id": "swim-2026-05-15",
+      "id": "push-2026-05-15",
       "date": "2026-05-15",
       "dayLabel": "Fri 15 May",
-      "type": "Swim",
-      "done": false,
-      "note": "20–40 laps depending on energy. Optional cable crunches or core work before/after."
-    },
-    {
-      "id": "push-2026-05-16",
-      "date": "2026-05-16",
-      "dayLabel": "Sat 16 May",
       "type": "Push",
       "done": false,
       "warmup": "Incline treadmill walk/jog — 10–15 min",
@@ -120,7 +112,7 @@
         {
           "name": "Lateral Raises",
           "db": true,
-          "lastPerf": "7.5 kg × 3×12 (Upper)",
+          "lastPerf": "7.5 kg × 3×12",
           "sets": [
             {"weight": 7.5, "reps": 15, "unit": "kg"},
             {"weight": 7.5, "reps": 15, "unit": "kg"},
@@ -147,17 +139,96 @@
       ]
     },
     {
-      "id": "rest-2026-05-17",
+      "id": "swim-2026-05-16",
+      "date": "2026-05-16",
+      "dayLabel": "Sat 16 May",
+      "type": "Swim",
+      "done": false,
+      "note": "20–40 laps depending on energy. Optional cable crunches or core work before/after."
+    },
+    {
+      "id": "legs-2026-05-17",
       "date": "2026-05-17",
       "dayLabel": "Sun 17 May",
+      "type": "Legs",
+      "done": false,
+      "warmup": "Incline treadmill walk/jog — 10–15 min",
+      "exercises": [
+        {
+          "name": "DB Goblet Squats",
+          "db": true,
+          "lastPerf": "20 kg × 3×10",
+          "sets": [
+            {"weight": 22.5, "reps": 10, "unit": "kg"},
+            {"weight": 22.5, "reps": 10, "unit": "kg"},
+            {"weight": 22.5, "reps": 10, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "Bulgarian Split Squats",
+          "db": true,
+          "note": "per leg",
+          "lastPerf": "10 kg × substituted (no bench)",
+          "sets": [
+            {"weight": 10, "reps": 10, "unit": "kg"},
+            {"weight": 10, "reps": 10, "unit": "kg"},
+            {"weight": 10, "reps": 10, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "Romanian Deadlifts",
+          "db": true,
+          "note": "each hand",
+          "lastPerf": "20 kg × 3×10",
+          "sets": [
+            {"weight": 22.5, "reps": 10, "unit": "kg"},
+            {"weight": 22.5, "reps": 10, "unit": "kg"},
+            {"weight": 22.5, "reps": 10, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "Leg Extensions",
+          "lastPerf": "30 kg × 3×12",
+          "sets": [
+            {"weight": 32.5, "reps": 12, "unit": "kg"},
+            {"weight": 32.5, "reps": 12, "unit": "kg"},
+            {"weight": 32.5, "reps": 12, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "Standing DB Calf Raises",
+          "db": true,
+          "note": "each hand",
+          "lastPerf": "17.5 kg × 3×15",
+          "sets": [
+            {"weight": 20, "reps": 15, "unit": "kg"},
+            {"weight": 20, "reps": 15, "unit": "kg"},
+            {"weight": 20, "reps": 15, "unit": "kg"}
+          ]
+        }
+      ],
+      "physio": [
+        "Chin tucks × 15",
+        "Cat-cow × 10",
+        "Cervical side bends (20–30 sec each side)",
+        "Upper trap stretch (20–30 sec each side)",
+        "Levator scapulae stretch (20–30 sec each side)",
+        "Thoracic extension over bench edge — 10 reps",
+        "Dead hang — 20–30 sec"
+      ]
+    },
+    {
+      "id": "rest-2026-05-18",
+      "date": "2026-05-18",
+      "dayLabel": "Mon 18 May",
       "type": "Rest",
       "done": false,
       "note": "Rest day."
     },
     {
-      "id": "upper-2026-05-18",
-      "date": "2026-05-18",
-      "dayLabel": "Mon 18 May",
+      "id": "upper-2026-05-19",
+      "date": "2026-05-19",
+      "dayLabel": "Tue 19 May",
       "type": "Upper",
       "done": false,
       "warmup": "Incline treadmill walk/jog — 10–15 min",
@@ -250,11 +321,245 @@
       ]
     },
     {
-      "id": "legs-2026-05-19",
-      "date": "2026-05-19",
-      "dayLabel": "Tue 19 May",
+      "id": "swim-2026-05-20",
+      "date": "2026-05-20",
+      "dayLabel": "Wed 20 May",
+      "type": "Swim",
+      "done": false,
+      "note": "20–40 laps depending on energy. Optional cable crunches or core work before/after."
+    },
+    {
+      "id": "legs2-2026-05-21",
+      "date": "2026-05-21",
+      "dayLabel": "Thu 21 May",
       "type": "Legs",
       "done": false,
+      "note": "Hamstring / glute emphasis",
+      "warmup": "Incline treadmill walk/jog — 10–15 min",
+      "exercises": [
+        {
+          "name": "Romanian Deadlifts",
+          "db": true,
+          "note": "each hand",
+          "lastPerf": "20 kg × 3×10",
+          "sets": [
+            {"weight": 22.5, "reps": 10, "unit": "kg"},
+            {"weight": 22.5, "reps": 10, "unit": "kg"},
+            {"weight": 22.5, "reps": 10, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "Dumbbell Walking Lunges",
+          "db": true,
+          "note": "each hand",
+          "lastPerf": "10 kg × 10/10",
+          "sets": [
+            {"weight": 10, "reps": 12, "unit": "kg"},
+            {"weight": 10, "reps": 12, "unit": "kg"},
+            {"weight": 10, "reps": 12, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "DB Goblet Squats",
+          "db": true,
+          "lastPerf": "20 kg × 3×10",
+          "sets": [
+            {"weight": 22.5, "reps": 10, "unit": "kg"},
+            {"weight": 22.5, "reps": 10, "unit": "kg"},
+            {"weight": 22.5, "reps": 10, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "Leg Extensions",
+          "lastPerf": "30 kg × 3×12",
+          "sets": [
+            {"weight": 30, "reps": 12, "unit": "kg"},
+            {"weight": 30, "reps": 12, "unit": "kg"},
+            {"weight": 30, "reps": 12, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "Standing DB Calf Raises",
+          "db": true,
+          "note": "each hand",
+          "lastPerf": "17.5 kg × 3×15",
+          "sets": [
+            {"weight": 20, "reps": 15, "unit": "kg"},
+            {"weight": 20, "reps": 15, "unit": "kg"},
+            {"weight": 20, "reps": 15, "unit": "kg"}
+          ]
+        }
+      ],
+      "physio": [
+        "Chin tucks × 15",
+        "Cat-cow × 10",
+        "Cervical side bends (20–30 sec each side)",
+        "Upper trap stretch (20–30 sec each side)",
+        "Levator scapulae stretch (20–30 sec each side)",
+        "Thoracic extension over bench edge — 10 reps",
+        "Dead hang — 20–30 sec"
+      ]
+    },
+    {
+      "id": "pull-2026-05-22",
+      "date": "2026-05-22",
+      "dayLabel": "Fri 22 May",
+      "type": "Pull",
+      "done": false,
+      "note": "Targets carry forward from Thu 14 — update after Thu 14 logged",
+      "warmup": "Incline treadmill walk/jog — 10–15 min",
+      "exercises": [
+        {
+          "name": "Pull-ups",
+          "lastPerf": "8 / 8 / 8 BW",
+          "sets": [
+            {"weight": 0, "reps": 10, "unit": "BW"},
+            {"weight": 0, "reps": 10, "unit": "BW"},
+            {"weight": 0, "reps": 10, "unit": "BW"}
+          ]
+        },
+        {
+          "name": "Barbell Rows",
+          "note": "per side",
+          "lastPerf": "12.5 kg × 3×12",
+          "sets": [
+            {"weight": 15, "reps": 10, "unit": "kg"},
+            {"weight": 15, "reps": 10, "unit": "kg"},
+            {"weight": 15, "reps": 10, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "Single-arm DB Rows",
+          "db": true,
+          "lastPerf": "22.5 kg × 3×12",
+          "sets": [
+            {"weight": 22.5, "reps": 12, "unit": "kg"},
+            {"weight": 22.5, "reps": 12, "unit": "kg"},
+            {"weight": 22.5, "reps": 12, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "Face Pulls",
+          "lastPerf": "30 kg × 2×15 (+ WU)",
+          "sets": [
+            {"weight": 30, "reps": 15, "unit": "kg"},
+            {"weight": 30, "reps": 15, "unit": "kg"},
+            {"weight": 30, "reps": 15, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "Hammer Curls",
+          "db": true,
+          "lastPerf": "15 kg × 12/12/10/10",
+          "sets": [
+            {"weight": 15, "reps": 12, "unit": "kg"},
+            {"weight": 15, "reps": 12, "unit": "kg"},
+            {"weight": 15, "reps": 12, "unit": "kg"},
+            {"weight": 15, "reps": 12, "unit": "kg"}
+          ]
+        }
+      ],
+      "physio": [
+        "Chin tucks × 15",
+        "Cat-cow × 10",
+        "Cervical side bends (20–30 sec each side)",
+        "Upper trap stretch (20–30 sec each side)",
+        "Levator scapulae stretch (20–30 sec each side)",
+        "Band pull-aparts (light) × 15",
+        "Prone Y-T-W — 10 reps each letter",
+        "Dead hang — 20–30 sec"
+      ]
+    },
+    {
+      "id": "swim-2026-05-23",
+      "date": "2026-05-23",
+      "dayLabel": "Sat 23 May",
+      "type": "Swim",
+      "done": false,
+      "note": "20–40 laps depending on energy. Optional cable crunches or core work before/after."
+    },
+    {
+      "id": "push-2026-05-24",
+      "date": "2026-05-24",
+      "dayLabel": "Sun 24 May",
+      "type": "Push",
+      "done": false,
+      "note": "Targets carry forward from Fri 15 — update after Fri 15 logged",
+      "warmup": "Incline treadmill walk/jog — 10–15 min",
+      "exercises": [
+        {
+          "name": "Incline BB Bench",
+          "lastPerf": "20 kg × 3×8 clean",
+          "sets": [
+            {"weight": 15, "reps": 8, "unit": "kg", "warmup": true},
+            {"weight": 22.5, "reps": 8, "unit": "kg"},
+            {"weight": 22.5, "reps": 8, "unit": "kg"},
+            {"weight": 22.5, "reps": 8, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "Flat BB Bench",
+          "lastPerf": "20 kg × 8/7/6",
+          "sets": [
+            {"weight": 20, "reps": 8, "unit": "kg"},
+            {"weight": 20, "reps": 8, "unit": "kg"},
+            {"weight": 20, "reps": 8, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "DB Shoulder Press",
+          "db": true,
+          "lastPerf": "17.5 kg × 3×10",
+          "sets": [
+            {"weight": 17.5, "reps": 12, "unit": "kg"},
+            {"weight": 17.5, "reps": 12, "unit": "kg"},
+            {"weight": 17.5, "reps": 12, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "Lateral Raises",
+          "db": true,
+          "lastPerf": "7.5 kg × 3×12",
+          "sets": [
+            {"weight": 7.5, "reps": 15, "unit": "kg"},
+            {"weight": 7.5, "reps": 15, "unit": "kg"},
+            {"weight": 7.5, "reps": 15, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "Tricep Pushdowns",
+          "lastPerf": "47.5 kg × 3×12",
+          "sets": [
+            {"weight": 47.5, "reps": 12, "unit": "kg"},
+            {"weight": 47.5, "reps": 12, "unit": "kg"},
+            {"weight": 47.5, "reps": 12, "unit": "kg"}
+          ]
+        }
+      ],
+      "physio": [
+        "Chin tucks × 15",
+        "Cervical rotations (slow) × 10 each side",
+        "Cervical side bends (20–30 sec each side)",
+        "Upper trap stretch (20–30 sec each side)",
+        "Thoracic extension over bench edge — 10 reps",
+        "Dead hang — 20–30 sec"
+      ]
+    },
+    {
+      "id": "rest-2026-05-25",
+      "date": "2026-05-25",
+      "dayLabel": "Mon 25 May",
+      "type": "Rest",
+      "done": false,
+      "note": "Rest day."
+    },
+    {
+      "id": "legs-2026-05-26",
+      "date": "2026-05-26",
+      "dayLabel": "Tue 26 May",
+      "type": "Legs",
+      "done": false,
+      "note": "Targets carry forward from Sun 17 — update after Sun 17 logged",
       "warmup": "Incline treadmill walk/jog — 10–15 min",
       "exercises": [
         {
@@ -321,26 +626,164 @@
       ]
     },
     {
-      "id": "swim-2026-05-20",
-      "date": "2026-05-20",
-      "dayLabel": "Wed 20 May",
+      "id": "swim-2026-05-27",
+      "date": "2026-05-27",
+      "dayLabel": "Wed 27 May",
       "type": "Swim",
       "done": false,
       "note": "20–40 laps depending on energy. Optional cable crunches or core work before/after."
     },
     {
-      "id": "legs2-2026-05-21",
-      "date": "2026-05-21",
-      "dayLabel": "Thu 21 May",
+      "id": "upper-2026-05-28",
+      "date": "2026-05-28",
+      "dayLabel": "Thu 28 May",
+      "type": "Upper",
+      "done": false,
+      "note": "Targets carry forward from Tue 19 — update after Tue 19 logged",
+      "warmup": "Incline treadmill walk/jog — 10–15 min",
+      "exercises": [
+        {
+          "name": "Pull-ups",
+          "lastPerf": "10 / 10 / 8 BW",
+          "sets": [
+            {"weight": 0, "reps": 10, "unit": "BW"},
+            {"weight": 0, "reps": 10, "unit": "BW"},
+            {"weight": 0, "reps": 10, "unit": "BW"}
+          ]
+        },
+        {
+          "name": "Machine Rows",
+          "lastPerf": "47.5 kg × 3×8",
+          "sets": [
+            {"weight": 50, "reps": 8, "unit": "kg"},
+            {"weight": 50, "reps": 8, "unit": "kg"},
+            {"weight": 50, "reps": 8, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "DB Bench Press",
+          "db": true,
+          "lastPerf": "22.5 kg × 3×12",
+          "sets": [
+            {"weight": 22.5, "reps": 12, "unit": "kg"},
+            {"weight": 22.5, "reps": 12, "unit": "kg"},
+            {"weight": 22.5, "reps": 12, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "DB Shoulder Press",
+          "db": true,
+          "lastPerf": "17.5 kg × 12/10/11",
+          "sets": [
+            {"weight": 17.5, "reps": 12, "unit": "kg"},
+            {"weight": 17.5, "reps": 12, "unit": "kg"},
+            {"weight": 17.5, "reps": 12, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "Face Pulls",
+          "lastPerf": "30 kg × 3×15",
+          "sets": [
+            {"weight": 32.5, "reps": 15, "unit": "kg"},
+            {"weight": 32.5, "reps": 15, "unit": "kg"},
+            {"weight": 32.5, "reps": 15, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "Lateral Raises",
+          "db": true,
+          "lastPerf": "7.5 kg × 3×12",
+          "sets": [
+            {"weight": 7.5, "reps": 15, "unit": "kg"},
+            {"weight": 7.5, "reps": 15, "unit": "kg"},
+            {"weight": 7.5, "reps": 15, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "Hammer Curls",
+          "db": true,
+          "lastPerf": "15 kg × 3×10",
+          "sets": [
+            {"weight": 15, "reps": 10, "unit": "kg"},
+            {"weight": 15, "reps": 10, "unit": "kg"},
+            {"weight": 15, "reps": 10, "unit": "kg"},
+            {"weight": 15, "reps": 10, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "Tricep Pushdowns",
+          "lastPerf": "47.5 kg × 3×12",
+          "sets": [
+            {"weight": 50, "reps": 12, "unit": "kg"},
+            {"weight": 50, "reps": 12, "unit": "kg"},
+            {"weight": 50, "reps": 12, "unit": "kg"}
+          ]
+        }
+      ],
+      "physio": [
+        "Chin tucks × 15",
+        "Cervical rotations (slow) × 10 each side",
+        "Band pull-aparts (light) × 15",
+        "Prone Y-T-W — 10 reps each letter",
+        "Dead hang — 20–30 sec",
+        "McKenzie neck extension — if tolerated"
+      ]
+    },
+    {
+      "id": "cardio-abs-2026-05-29",
+      "date": "2026-05-29",
+      "dayLabel": "Fri 29 May",
+      "type": "Cardio + Abs",
+      "done": false,
+      "exercises": [
+        {
+          "name": "Incline Treadmill",
+          "note": "sustained cardio, not warm-up pace",
+          "sets": [
+            {"weight": 0, "reps": 30, "unit": "min"}
+          ]
+        },
+        {
+          "name": "Cable Crunches",
+          "lastPerf": "first session",
+          "sets": [
+            {"weight": 25, "reps": 15, "unit": "kg"},
+            {"weight": 25, "reps": 15, "unit": "kg"},
+            {"weight": 25, "reps": 15, "unit": "kg"}
+          ]
+        },
+        {
+          "name": "Hanging Knee Raises",
+          "sets": [
+            {"weight": 0, "reps": 12, "unit": "BW"},
+            {"weight": 0, "reps": 12, "unit": "BW"},
+            {"weight": 0, "reps": 12, "unit": "BW"}
+          ]
+        },
+        {
+          "name": "Plank",
+          "sets": [
+            {"weight": 0, "reps": 45, "unit": "sec"},
+            {"weight": 0, "reps": 45, "unit": "sec"},
+            {"weight": 0, "reps": 45, "unit": "sec"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "legs2-2026-05-30",
+      "date": "2026-05-30",
+      "dayLabel": "Sat 30 May",
       "type": "Legs",
       "done": false,
+      "note": "Hamstring / glute emphasis. Targets carry forward from Thu 21 — update after Thu 21 logged",
       "warmup": "Incline treadmill walk/jog — 10–15 min",
       "exercises": [
         {
           "name": "Romanian Deadlifts",
           "db": true,
           "note": "each hand",
-          "lastPerf": "22.5 kg × 3×10 (Legs 1)",
+          "lastPerf": "20 kg × 3×10",
           "sets": [
             {"weight": 22.5, "reps": 10, "unit": "kg"},
             {"weight": 22.5, "reps": 10, "unit": "kg"},
@@ -351,7 +794,7 @@
           "name": "Dumbbell Walking Lunges",
           "db": true,
           "note": "each hand",
-          "lastPerf": "10 kg × 10/10 (ramped)",
+          "lastPerf": "10 kg × 10/10",
           "sets": [
             {"weight": 10, "reps": 12, "unit": "kg"},
             {"weight": 10, "reps": 12, "unit": "kg"},
@@ -361,7 +804,7 @@
         {
           "name": "DB Goblet Squats",
           "db": true,
-          "lastPerf": "22.5 kg × 3×10 (Legs 1)",
+          "lastPerf": "20 kg × 3×10",
           "sets": [
             {"weight": 22.5, "reps": 10, "unit": "kg"},
             {"weight": 22.5, "reps": 10, "unit": "kg"},
@@ -370,7 +813,7 @@
         },
         {
           "name": "Leg Extensions",
-          "lastPerf": "32.5 kg × 3×12 (Legs 1)",
+          "lastPerf": "30 kg × 3×12",
           "sets": [
             {"weight": 30, "reps": 12, "unit": "kg"},
             {"weight": 30, "reps": 12, "unit": "kg"},
@@ -381,7 +824,7 @@
           "name": "Standing DB Calf Raises",
           "db": true,
           "note": "each hand",
-          "lastPerf": "20 kg × 3×15 (Legs 1)",
+          "lastPerf": "17.5 kg × 3×15",
           "sets": [
             {"weight": 20, "reps": 15, "unit": "kg"},
             {"weight": 20, "reps": 15, "unit": "kg"},
@@ -400,20 +843,12 @@
       ]
     },
     {
-      "id": "swim-2026-05-22",
-      "date": "2026-05-22",
-      "dayLabel": "Fri 22 May",
-      "type": "Swim",
-      "done": false,
-      "note": "20–40 laps depending on energy. Optional cable crunches or core work before/after."
-    },
-    {
-      "id": "rest-2026-05-23",
-      "date": "2026-05-23",
-      "dayLabel": "Sat 23 May",
+      "id": "rest-2026-05-31",
+      "date": "2026-05-31",
+      "dayLabel": "Sun 31 May",
       "type": "Rest",
       "done": false,
-      "note": "End of 10-day block. Rest before next block begins Sun 24 May."
+      "note": "End of cycle. Next cycle starts Mon 1 Jun."
     }
   ]
 }
